@@ -25,15 +25,18 @@ void LAdd(Elem *&first, Elem *&last, Info value)
 void LRemove(Elem *&first, int k)
 {
 	Elem *first1 = first;
-	while (first->link != NULL && first->info != k)	 //Надсилає перший елемент списку на позицію із значенням k
-		first = first->link;
-	while (first->link != NULL)						 //Вилучає елементи списку після елементу із значенням k
+	while (first->link != NULL)
 	{
-		Elem* tmp = first->link->link;
-		delete first->link;
-		first->link = tmp;
+		if (first->info != k)					//Надсилає перший елемент списку на позицію із значенням k
+			first = first->link;
+		else									//Вилучає елементи списку після елементу із значенням k
+		{
+			Elem* tmp = first->link->link;
+			delete first->link;
+			first->link = tmp;
+		}
 	}
-	first = first1;									//Повертає перший елемент на початкову позицію списку
+	first = first1;								//Повертає перший елемент на початкову позицію списку
 }
 
 void LPrint(Elem *&first)
