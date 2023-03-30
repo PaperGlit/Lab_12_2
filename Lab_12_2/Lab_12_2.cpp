@@ -61,6 +61,5 @@ int main()
 	cout << "k = "; cin >> k;
 	LRemove(first, k);
 	LPrint(first);
-	cout << endl;
 	return 0;
 }
