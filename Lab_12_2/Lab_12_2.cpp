@@ -12,7 +12,7 @@ struct Elem
 
 void LAdd(Elem *&first, Elem *&last, Info value)
 {
-	Elem* tmp = new Elem;
+	Elem *tmp = new Elem;
 	tmp->info = value;
 	tmp->link = NULL;
 	if (last != NULL)
@@ -31,7 +31,7 @@ void LRemove(Elem *&first, int k)
 			first = first->link;
 		else									//Вилучає елементи списку після елементу із значенням k
 		{
-			Elem* tmp = first->link->link;
+			Elem *tmp = first->link->link;
 			delete first->link;
 			first->link = tmp;
 		}
@@ -41,7 +41,7 @@ void LRemove(Elem *&first, int k)
 
 void LPrint(Elem *&first)
 {
-	Elem* first1 = first;
+	Elem *first1 = first;
 	while (first != NULL)
 	{
 		cout << first->info << "  ";
