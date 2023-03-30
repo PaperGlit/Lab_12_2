@@ -25,33 +25,37 @@ void LAdd(Elem *&first, Elem *&last, Info value)
 void LRemove(Elem *&first, int k)
 {
 	Elem *first1 = first;
-	while (first->info != k && first->link != NULL)
+	while (first->link != NULL && first->info != k)	 //Надсилає перший елемент списку на позицію із значенням k
 		first = first->link;
-	while (first->link != NULL && first->link->info != k)
+	while (first->link != NULL)						 //Вилучає елементи списку після елементу із значенням k
 	{
 		Elem* tmp = first->link->link;
 		delete first->link;
 		first->link = tmp;
 	}
-	first = first1;
+	first = first1;									//Повертає перший елемент на початкову позицію списку
 }
 
 void LPrint(Elem *&first)
 {
+	Elem* first1 = first;
 	while (first != NULL)
 	{
 		cout << first->info << "  ";
 		first = first->link;
 	}
+	first = first1;
+	cout << endl;
 }
 
 int main()
 {
 	int k;
-	cout << "k = "; cin >> k;
 	Elem *first = NULL, *last = NULL;
 	for (int i = 0; i <= 10; i++)
 		LAdd(first, last, i);
+	LPrint(first);
+	cout << "k = "; cin >> k;
 	LRemove(first, k);
 	LPrint(first);
 	cout << endl;
