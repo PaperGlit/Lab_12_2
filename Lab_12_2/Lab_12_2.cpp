@@ -22,35 +22,38 @@ void LAdd(Elem *&first, Elem *&last, Info value)
 		first = tmp;
 }
 
-Info LRemove(Elem *&first, Elem *&last)
+void LRemove(Elem *&first, int k)
 {
-	Elem* tmp = first->link->link;
-	Info value = last->info;
-	delete first->link;
-	first->link = tmp;
-	return value;
+	Elem *first1 = first;
+	while (first->info != k && first->link != NULL)
+		first = first->link;
+	while (first->link != NULL && first->link->info != k)
+	{
+		Elem* tmp = first->link->link;
+		delete first->link;
+		first->link = tmp;
+	}
+	first = first1;
+}
+
+void LPrint(Elem *&first)
+{
+	while (first != NULL)
+	{
+		cout << first->info << "  ";
+		first = first->link;
+	}
 }
 
 int main()
 {
+	int k;
+	cout << "k = "; cin >> k;
 	Elem *first = NULL, *last = NULL;
-	for (int i = 20; i >= 0; i -= 2)
+	for (int i = 0; i <= 10; i++)
 		LAdd(first, last, i);
-	//do
-	//{
-	//	cout << LRemove(first, last) << " ";
-	//} while (first->link->info != 6);
-	while (first->link != NULL)
-	{
-		if (first->link->info != 6)
-		{
-			Elem* tmp = first->link->link; // 1
-			delete first->link; // 2
-			first->link = tmp; // 3
-		}
-		else
-			first = first->link;
-	}
+	LRemove(first, k);
+	LPrint(first);
 	cout << endl;
 	return 0;
 }
